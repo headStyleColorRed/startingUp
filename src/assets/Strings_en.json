@@ -3,6 +3,13 @@
 		"alreadyAMember": "Already a member?",
 		"notAMemberYet": "Not a member yet?",
 		"signIn": "Sign in",
-		"signUp": "Sign up"
+		"signUp": "Sign up",
+		"createAccount": "Create Account",
+		"email": "Email",
+		"password": "Password",
+		"passwordConfirmation": "Confirm password",
+		"moreThanNCharacters": "At least 8 characters",
+		"termsAndConditionsAgree": "I agree to all the statements included in the ",
+		"termsAndConditionsPage": "terms of service"
 	}
 }

@@ -61,6 +61,7 @@ export default {
   width: 100vw;
   display: grid;
   grid-template-columns: 1.25fr 1fr;
+   color: #666666;
 }
 
 /* - - - - - - - - L E F T   C O N T A I N E R - - - - - */
