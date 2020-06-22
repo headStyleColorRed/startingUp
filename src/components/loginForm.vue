@@ -15,7 +15,7 @@
     </div>
 
     <!--- - - C o n f i r m   P a s s w o r d  - - - -->
-    <div v-if="!isShowingLogin" class="inputWrapper inputConfirmPassword">
+    <div v-if="!loginStatus" class="inputWrapper inputConfirmPassword">
       <label>{{Strings.passwordConfirmation}}</label>
       <br />
       <input
@@ -27,7 +27,7 @@
     </div>
 
     <!--- - - T e r m s   A n d   C o n d i t i o n s - - - -->
-    <div class="termsAndConditions">
+    <div v-if="!loginStatus" class="termsAndConditions">
       <input
         type="checkbox"
         class="checkbox"
@@ -36,16 +36,19 @@
       />
       <span class="termsAndConditionsText">
         {{Strings.termsAndConditionsAgree}}
-        <b class="termsOfService" v-on:click="goToTermsAndConditions()">{{Strings.termsAndConditionsPage}}</b>
+        <b
+          class="termsOfService"
+          v-on:click="goToTermsAndConditions()"
+        >{{Strings.termsAndConditionsPage}}</b>
       </span>
     </div>
 
     <!--- - - B u t t o n  - - - -->
-	<div class="buttonWrapper">
-		<div class="buttonContainer">
-			<p class="buttonText">{{Strings.createAccount}}</p>
-		</div>
-	</div>
+    <div class="buttonWrapper">
+      <div class="buttonContainer">
+        <p class="buttonText">{{Strings.createAccount}}</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -53,11 +56,16 @@
 import stringsImport from "../assets/Strings_en.json";
 
 export default {
-  name: "Home",
+  props: {
+    loginStatus: {
+      type: Boolean,
+      required: true
+    }
+  },
+  name: "login",
   data() {
     return {
       isTermsAndConditionsAccepted: false,
-      isShowingLogin: false,
       Strings: new Object(),
       user: {
         email: null,
@@ -71,15 +79,15 @@ export default {
   },
   methods: {
     changeLoginScreen() {
-      this.isShowingLogin = !this.isShowingLogin;
+      this.loginStatus = !this.loginStatus;
     },
     checkTermsAndConditions() {
       this.isTermsAndConditionsAccepted = !this.isTermsAndConditionsAccepted;
       console.log(this.isTermsAndConditionsAccepted);
-	},
-	goToTermsAndConditions() {
-		console.log("to terms and conditions :)");
-	}
+    },
+    goToTermsAndConditions() {
+      console.log("to terms and conditions :)");
+    }
   },
   components: {}
 };
@@ -87,10 +95,9 @@ export default {
 
 <style scoped>
 .loginForm {
-  height: 30vw;
+  height: 27vw;
   width: 30rem;
   color: #666666;
-  /* border: 1px solid black; */
 }
 
 .inputFields {
@@ -124,7 +131,7 @@ input:focus {
 }
 
 .termsAndConditionsText {
-	font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
 .termsOfService {
@@ -135,31 +142,32 @@ input:focus {
 }
 
 .checkbox {
-	transform: scale(1.2);
-	margin-right: 0.5rem;
+  transform: scale(1.2);
+  margin-right: 0.5rem;
 }
 
 .buttonWrapper {
-	display: grid;
+  display: grid;
 }
 
 .buttonContainer {
-	display: grid;
-	position: relative;
-	justify-self: center;
-	background-color: rgb(39, 38, 38);
-	color: white;
-	margin-top: 2rem;
-	height: 3.4rem;
-	width: 15rem;
-	border-radius: 5rem;
+  display: grid;
+  position: relative;
+  justify-self: center;
+  background-color: rgb(39, 38, 38);
+  color: white;
+  margin-top: 2rem;
+  height: 3.4rem;
+  width: 15rem;
+  border-radius: 5rem;
+  cursor: pointer;
 }
 
 .buttonText {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
 
