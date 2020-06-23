@@ -56,7 +56,6 @@
         <br />LAUNCH YOUR
         <span class="inspirationalQuoteEnding">STARTUP</span>
       </p>
-	  <img class="rithContainerImg" src="../assets/Photos/plantIcon.png" alt="">
     </div>
   </div>
 </template>
@@ -202,10 +201,4 @@ export default {
   font-weight: 400;
 }
 
-.rithContainerImg {
-	position: absolute;
-	top: -10rem;
-	right: 0;
-	height: 120vh;
-}
 </style>

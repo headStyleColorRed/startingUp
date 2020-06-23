@@ -45,8 +45,9 @@
 
     <!--- - - B u t t o n  - - - -->
     <div class="buttonWrapper">
-      <div class="buttonContainer">
-        <p class="buttonText">{{Strings.createAccount}}</p>
+      <div v-on:click="parseInput()" class="buttonContainer">
+        <p v-if="loginStatus" class="buttonText">{{Strings.signIn}}</p>
+        <p v-else class="buttonText">{{Strings.createAccount}}</p>
       </div>
     </div>
   </div>
@@ -86,8 +87,19 @@ export default {
       console.log(this.isTermsAndConditionsAccepted);
     },
     goToTermsAndConditions() {
-      console.log("to terms and conditions :)");
-    }
+	},
+	parseInput() {
+		if (this.loginStatus)
+			parseLoginData()
+		else
+			parseRegisteringData()
+	},
+	parseLoginData() {
+
+	},
+	parseRegisteringData() {
+		
+	}
   },
   components: {}
 };
