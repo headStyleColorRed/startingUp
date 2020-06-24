@@ -2,7 +2,7 @@
 	"screen_login": {
 		"alreadyAMember": "Already a member?",
 		"notAMemberYet": "Not a member yet?",
-		"signIn": "Sign in",
+		"signIn": "Log in",
 		"signUp": "Sign up",
 		"createAccount": "Create Account",
 		"email": "Email",
