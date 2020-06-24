@@ -7,6 +7,15 @@ import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false
 
+
+router.beforeEach((to, from, next) => {
+	if (!store.getters.logged && to.name != "Login") {
+		next("/login")
+	} else {
+		next()
+	}
+});
+
 new Vue({
   router,
   store,

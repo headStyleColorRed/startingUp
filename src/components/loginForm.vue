@@ -86,20 +86,11 @@ export default {
       this.isTermsAndConditionsAccepted = !this.isTermsAndConditionsAccepted;
       console.log(this.isTermsAndConditionsAccepted);
     },
-    goToTermsAndConditions() {
-	},
-	parseInput() {
-		if (this.loginStatus)
-			parseLoginData()
-		else
-			parseRegisteringData()
-	},
-	parseLoginData() {
-
-	},
-	parseRegisteringData() {
-		
-	}
+    goToTermsAndConditions() {},
+    parseInput() {
+		console.log("child");
+      this.$emit('clicked', 'someValue')
+    }
   },
   components: {}
 };
