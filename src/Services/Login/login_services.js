@@ -1,29 +1,58 @@
 import axios from "axios"
 
-function logUser(username, password) {
+async function logUser(username, password) {
     let user ={
         "username": username,
         "password": password
-    }
-    axios.post("http://localhost:8888/login/log_user", user)
-        .then((res) => { 
-			console.log(res.data); 
-			return true;})
+	}
+	
+	let promise = new Promise((resolve, reject) => {
+		axios.post("http://localhost:8888/login/log_user", user)
+        .then((res) => {  
+			resolve(res.data)})
 		.catch((res) => {
-			console.log(res);
-			console.log(res.data); 
-			return false })
+			reject(res.data)})
+	})
+	
+	let result = await promise
+	return result
 }
 
-function registerUser(username, password, passwordConfirmation) {
+async function registerUser(username, password, passwordConfirmation) {
     let user ={
         "username": username,
 		"password": password,
 		"passwordConfirmation": passwordConfirmation
-    }
-    axios.post("http://localhost:8888/register/register_user", user)
-        .then((res) => {console.log(res); return true})
-        .catch((res) => {console.log(res); return false })
+	}
+	
+	let promise = new Promise((resolve, reject) => {
+		axios.post("http://localhost:8888/register/register_user", user)
+        .then((res) => {  
+			resolve(res.data)})
+		.catch((res) => {
+			reject(res.data)})
+	})
+	
+	let result = await promise
+	return result
+}
+
+async function logOut(username, password) {
+    let user ={
+        "username": username,
+        "password": password
+	}
+	
+	let promise = new Promise((resolve, reject) => {
+		axios.post("http://localhost:8888/logout/logout_user", user)
+        .then((res) => {  
+			resolve(res.data)})
+		.catch((res) => {
+			reject(res.data)})
+	})
+	
+	let result = await promise
+	return result
 }
 
 function logWithGoogle() {
@@ -36,4 +65,5 @@ export default {
     logUser,
 	registerUser,
 	logWithGoogle,
+	logOut,
 }

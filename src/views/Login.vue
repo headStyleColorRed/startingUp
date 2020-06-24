@@ -23,7 +23,7 @@
       <!--- - - left container medium - - - -->
       <div class="leftContainer-medium">
         <h2 class="leftContainer-medium-title">{{isShowingLogin ? Strings.signIn : Strings.signUp}}</h2>
-        <login-form :loginStatus="isShowingLogin" @clicked="onClickChild"/>
+        <login-form :loginStatus="isShowingLogin" v-on:launchLoginProcess="processUserInputData" />
       </div>
 
       <!--- - - left container bottom - - - -->
@@ -40,7 +40,7 @@
           </div>
           <div class="externalLogin">
             <img src="../assets/Photos/linkedinIcon.svg" alt />
-            <span>Sign up with Linkedins</span>
+            <span>Sign up with Linkedin</span>
           </div>
         </div>
       </div>
@@ -63,6 +63,8 @@
 <script>
 import stringsImport from "../assets/Strings_en.json";
 import loginForm from "../components/loginForm.vue";
+import validation from "../functionalities/validation.js";
+import login_services from "../Services/Login/login_services.js";
 
 export default {
   name: "login",
@@ -78,23 +80,46 @@ export default {
   methods: {
     changeLoginScreen() {
       this.isShowingLogin = !this.isShowingLogin;
-	},
-	processUserInputData(isLogin) {
-		console.log("parent");
-		if (isLogin)
-			parseLoginData()
-		else
-			parseRegisteringData()
-	},
-	parseLoginData() {
-		console.log("parse login");
-	},
-	parseRegisteringData() {
-		console.log("parse register");
-	},
-	onClickChild (value) {
-      console.log(value) // someValue
-    }
+    },
+    processUserInputData(userData) {
+      if (this.isShowingLogin) this.parseLoginData(userData);
+      else this.parseRegisteringData(userData);
+    },
+    parseLoginData(userData) {
+      let validationResult = validation.validateLoginData(userData);
+      if (!validationResult.isError) {
+        login_services
+          .logUser(userData.username, userData.password)
+          .then(res => {
+            if (res.code == "200" || res.includes("already")) this.logUser(userData);
+            else console.log("server: " + res);
+          });
+      } else {
+        console.log(validationResult.errorMessage);
+      }
+    },
+    parseRegisteringData(userData) {
+      let validationResult = validation.validateRegisterData(userData);
+      if (!validationResult.isError) {
+        login_services
+          .registerUser(
+            userData.username,
+            userData.password,
+            userData.passwordConfirmation
+          )
+          .then(res => {
+            if (res.code == "200") location.reload();
+            else console.log("server: " + res);
+          });
+      } else {
+        console.log(validationResult.errorMessage);
+      }
+    },
+    logUser(userData) {
+	  this.$store.commit("setUserLoginData", userData);
+	  this.$router.push("/")
+	  
+    },
   },
   components: {
     "login-form": loginForm
@@ -216,5 +241,4 @@ export default {
   color: rgb(61, 110, 5);
   font-weight: 400;
 }
-
 </style>

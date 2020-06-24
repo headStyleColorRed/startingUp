@@ -4,7 +4,7 @@
     <div class="inputWrapper inputEmail">
       <label>{{Strings.email}}</label>
       <br />
-      <input class="inputFields shadow" type="text" v-model="user.email" />
+      <input class="inputFields shadow" type="text" v-model="user.username" />
     </div>
 
     <!--- - - P a s s w o r d  - - - -->
@@ -63,15 +63,16 @@ export default {
       required: true
     }
   },
-  name: "login",
+  name: "loginForm",
   data() {
     return {
       isTermsAndConditionsAccepted: false,
       Strings: new Object(),
       user: {
-        email: null,
-        password: null,
-        passwordConfirmation: null
+        username: "irlandesmajere@gmail.com",
+        password: "Navidad1",
+		passwordConfirmation: "Navidad1",
+		role: "user"
       }
     };
   },
@@ -88,8 +89,12 @@ export default {
     },
     goToTermsAndConditions() {},
     parseInput() {
-		console.log("child");
-      this.$emit('clicked', 'someValue')
+		if (this.loginStatus) {
+			  this.$emit("launchLoginProcess", this.user);
+		} else if (this.isTermsAndConditionsAccepted) {
+			  this.$emit("launchLoginProcess", this.user);
+		} else
+			alert("You must accept terms and conditions")
     }
   },
   components: {}
