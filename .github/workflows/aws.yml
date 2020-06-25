@@ -29,7 +29,7 @@ jobs:
       - name: ls -a via ssh
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: ls -a
+          command: sh /home/ubuntu/documents/updateWeb.sh
           host: ${{ secrets.HOST }}
           username: ubuntu
           privateKey: ${{ secrets.KEY}}
