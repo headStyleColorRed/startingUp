@@ -26,10 +26,10 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
-      - name: ls -a via ssh
+      - name: Update Web
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: sh /home/ubuntu/documents/updateWeb.sh
+          command: sh updateWeb.sh
           host: ${{ secrets.HOST }}
           username: ubuntu
           privateKey: ${{ secrets.KEY}}
