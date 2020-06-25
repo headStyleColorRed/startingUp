@@ -26,10 +26,10 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
-      # Runs a single command using the runners shell
-      - name: Create Password
-        run: echo ${{ secrets.KEY }} >> serverKey.pem
-
-      # Runs a set of commands using the runners shell
-      - name: Ssh into server
-        run: ssh ${{ secrets.HOST }}@${{ secrets.IP }} -i serverKey.pem
+      - name: ls -a via ssh
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: ls -a
+          host: ${{ secrets.HOST }}
+          username: ubuntu
+          privateKey: ${{ secrets.KEY}}
