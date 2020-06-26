@@ -26,7 +26,7 @@ jobs:
       - name: Update Web
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: sudo touch holaRodri.txt
+          command: sudo sh updateWeb.sh
           host: ${{ secrets.HOST }}
           username: ubuntu
           privateKey: ${{ secrets.KEY}}
