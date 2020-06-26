@@ -21,7 +21,7 @@ Vue.use(VueRouter)
   },
   {
     path: '*',
-	redirect: "/login",
+	redirect: "/",
   }
 ]
 
