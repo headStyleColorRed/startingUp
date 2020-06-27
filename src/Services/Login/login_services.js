@@ -2,7 +2,7 @@ import axios from "axios"
 
 const Environment = {
 	local: "localhost",
-	dev: "15.236.191.15",
+	dev: "15.188.37.72",
 	pro: ""
 }
 
