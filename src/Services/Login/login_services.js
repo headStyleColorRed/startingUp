@@ -3,10 +3,11 @@ import axios from "axios"
 const Environment = {
 	local: "localhost",
 	dev: "15.188.37.72",
+	dock: "login_server",
 	pro: ""
 }
 
-let currentEnvironment = Environment.dev
+let currentEnvironment = Environment.dock
 
 
 async function logUser(username, password) {
