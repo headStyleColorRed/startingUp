@@ -26,21 +26,38 @@
         <login-form :loginStatus="isShowingLogin" v-on:launchLoginProcess="processUserInputData" />
       </div>
 
-      <!--- - - left container bottom - - - -->
-      <div class="leftContainer-bottom">
-        <div class="divisorsContainer">
-          <hr class="divisors" />
-          <p id="divisorText">Or</p>
-          <hr class="divisors" />
+      <!--- - - left container WEB bottom - - - -->
+      <div class="leftContainer-bottom-web">
+        <div class="divisorsContainer-web">
+          <hr class="divisors-web" />
+          <p id="divisorText-web">Or</p>
+          <hr class="divisors-web" />
         </div>
-        <div class="externalLoginButtons">
-          <div class="externalLogin">
+        <div class="externalLoginButtons-web">
+          <div class="externalLogin-web">
             <img src="../assets/Photos/googleIcon.svg" alt />
             <span>Sign up with Google</span>
           </div>
-          <div class="externalLogin">
+          <div class="externalLogin-web">
             <img src="../assets/Photos/linkedinIcon.svg" alt />
             <span>Sign up with Linkedin</span>
+          </div>
+        </div>
+      </div>
+
+      <!--- - - left container MOBILE bottom - - - -->
+      <div :style="mobileStyle" class="leftContainer-bottom-mobile">
+        <div class="divisorsContainer-mobile">
+          <hr class="divisors-mobile" />
+          <p id="divisorText-mobile">Or</p>
+          <hr class="divisors-mobile" />
+        </div>
+        <div class="externalLoginButtonsMobile">
+          <div class="externalLogin-mobile">
+            <img src="../assets/Photos/googleIcon.svg" alt />
+          </div>
+          <div class="externalLogin-mobile">
+            <img src="../assets/Photos/linkedinIcon.svg" alt />
           </div>
         </div>
       </div>
@@ -71,7 +88,8 @@ export default {
   data() {
     return {
       isShowingLogin: true,
-      Strings: new Object()
+      Strings: new Object(),
+      mobileStyle: ""
     };
   },
   mounted() {
@@ -91,7 +109,8 @@ export default {
         login_services
           .logUser(userData.username, userData.password)
           .then(res => {
-            if (res.code == "200" || res.includes("already")) this.logUser(userData);
+            if (res.code == "200" || res.includes("already"))
+              this.logUser(userData);
             else console.log("server: " + res);
           });
       } else {
@@ -116,10 +135,15 @@ export default {
       }
     },
     logUser(userData) {
-	  this.$store.commit("setUserLoginData", userData);
-	  this.$router.push("/")
-	  
-    },
+      this.$store.commit("setUserLoginData", userData);
+      this.$router.push("/");
+    }
+  },
+  watch: {
+    isShowingLogin(val) {
+      if (val == false) this.mobileStyle = "display: none;";
+      else this.mobileStyle = "";
+    }
   },
   components: {
     "login-form": loginForm
@@ -128,117 +152,511 @@ export default {
 </script>
 
 <style scoped>
-.login {
-  height: 100vh;
-  width: 100vw;
-  display: grid;
-  grid-template-columns: 1.25fr 1fr;
-  color: #666666;
+/*-------------- IPHONE 5 ----------------*/
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
+  .login {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1.25fr 0;
+    color: #666666;
+  }
+
+  /* - - - - - - - - L E F T   C O N T A I N E R - - - - - */
+  .leftContainer {
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 0.5fr 4fr 1fr;
+  }
+  /* - - - left container top - - - */
+  .leftContainer-top p {
+    padding: 2rem;
+    padding-bottom: 0rem;
+    text-align: right;
+  }
+
+  .header_login {
+    font-weight: 400;
+    color: rgb(61, 110, 5);
+    cursor: pointer;
+  }
+
+  /* - - - left container medium - - - */
+  .leftContainer-medium {
+    position: relative;
+    justify-self: center;
+  }
+
+  .leftContainer-medium-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+
+  /* - - - left container bottom - - - */
+  .leftContainer-bottom-web {
+    display: none;
+  }
+
+  .leftContainer-bottom-mobile {
+    display: grid;
+  }
+
+  .divisorsContainer-mobile {
+    display: grid;
+    grid-template-columns: 3fr 1fr 3fr;
+  }
+
+  .divisors-mobile {
+    border: 0.1px solid rgb(223, 223, 223);
+  }
+
+  #divisorText-mobile {
+    text-align: center;
+    margin-top: -0.6rem;
+    margin-left: -0.2rem;
+    color: rgb(179, 179, 179);
+    font-size: 0.9rem;
+  }
+
+  .externalLoginButtonsMobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 3rem;
+  }
+  .externalLogin-mobile {
+    justify-self: center;
+  }
+  .externalLogin-mobile img {
+    height: 2rem;
+  }
+
+  /* - - - - - - - R I G H T   C O N T A I N E R - - - - - */
+  .rightContainer {
+    display: none;
+  }
+}
+/*-------------- IPHONE 6 ----------------*/
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: portrait) {
+  .leftContainer {
+    grid-template-rows: 1fr 4fr 1fr;
+  }
+}
+/*---------------- IPAD ----------------*/
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .login {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1.25fr 0;
+    color: #666666;
+  }
+
+  /* - - - - - - - - L E F T   C O N T A I N E R - - - - - */
+  .leftContainer {
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 1.5fr 4fr 1fr;
+  }
+  /* - - - left container top - - - */
+  .leftContainer-top p {
+    padding: 2rem;
+    padding-bottom: 0rem;
+    text-align: right;
+  }
+
+  .header_login {
+    font-weight: 400;
+    color: rgb(61, 110, 5);
+    cursor: pointer;
+  }
+
+  /* - - - left container medium - - - */
+  .leftContainer-medium {
+    position: relative;
+    justify-self: center;
+  }
+
+  .leftContainer-medium-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+
+  /* - - - left container bottom - - - */
+  .leftContainer-bottom-web {
+    display: none;
+  }
+
+  .leftContainer-bottom-mobile {
+    display: grid;
+  }
+
+  .divisorsContainer-mobile {
+    display: grid;
+    grid-template-columns: 3fr 1fr 3fr;
+  }
+
+  .divisors-mobile {
+    border: 0.1px solid rgb(223, 223, 223);
+  }
+
+  #divisorText-mobile {
+    text-align: center;
+    margin-top: -0.6rem;
+    margin-left: -0.2rem;
+    color: rgb(179, 179, 179);
+    font-size: 0.9rem;
+  }
+
+  .externalLoginButtonsMobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 3rem;
+  }
+  .externalLogin-mobile {
+    justify-self: center;
+  }
+  .externalLogin-mobile img {
+    height: 2rem;
+  }
+
+  /* - - - - - - - R I G H T   C O N T A I N E R - - - - - */
+  .rightContainer {
+    display: none;
+  }
 }
 
-/* - - - - - - - - L E F T   C O N T A I N E R - - - - - */
-.leftContainer {
-  position: relative;
-  background-color: rgb(255, 255, 255);
-  height: 100vh;
-  display: grid;
-  grid-template-rows: 1fr 4fr 1fr;
-}
-/* - - - left container top - - - */
-.leftContainer-top p {
-  padding: 2rem;
-  text-align: right;
+/*-------------- HALF SCREEN ----------------*/
+@media only screen and (min-device-width: 500px) and (max-width: 1000px) {
+  .login {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1.25fr 0;
+    color: #666666;
+  }
+
+  /* - - - - - - - - L E F T   C O N T A I N E R - - - - - */
+  .leftContainer {
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 1.5fr 4fr 1fr;
+  }
+  /* - - - left container top - - - */
+  .leftContainer-top p {
+    padding: 2rem;
+    padding-bottom: 0rem;
+    text-align: right;
+  }
+
+  .header_login {
+    font-weight: 400;
+    color: rgb(61, 110, 5);
+    cursor: pointer;
+  }
+
+  /* - - - left container medium - - - */
+  .leftContainer-medium {
+    position: relative;
+    justify-self: center;
+  }
+
+  .leftContainer-medium-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+
+  /* - - - left container bottom - - - */
+  .leftContainer-bottom-web {
+    display: none;
+  }
+
+  .leftContainer-bottom-mobile {
+    display: grid;
+  }
+
+  .divisorsContainer-mobile {
+    display: grid;
+    grid-template-columns: 3fr 1fr 3fr;
+  }
+
+  .divisors-mobile {
+    border: 0.1px solid rgb(223, 223, 223);
+  }
+
+  #divisorText-mobile {
+    text-align: center;
+    margin-top: -0.6rem;
+    margin-left: -0.2rem;
+    color: rgb(179, 179, 179);
+    font-size: 0.9rem;
+  }
+
+  .externalLoginButtonsMobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 3rem;
+  }
+  .externalLogin-mobile {
+    justify-self: center;
+  }
+  .externalLogin-mobile img {
+    height: 2rem;
+  }
+
+  /* - - - - - - - R I G H T   C O N T A I N E R - - - - - */
+  .rightContainer {
+    display: none;
+  }
 }
 
-.header_login {
-  font-weight: 400;
-  color: rgb(61, 110, 5);
-  cursor: pointer;
+/*-------------- FULL SCREEN ----------------*/
+@media only screen and (min-width: 1001px) and (max-width: 1450px) {
+  .login {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    color: #666666;
+  }
+
+  /* - - - - - - - - L E F T   C O N T A I N E R - - - - - */
+  .leftContainer {
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr 4fr 1fr;
+  }
+  /* - - - left container top - - - */
+  .leftContainer-top p {
+    padding: 2rem;
+    text-align: right;
+  }
+
+  .header_login {
+    font-weight: 400;
+    color: rgb(61, 110, 5);
+    cursor: pointer;
+  }
+
+  /* - - - left container medium - - - */
+  .leftContainer-medium {
+    position: relative;
+    padding: 0 10rem;
+  }
+
+  .leftContainer-medium-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+
+  /* - - - left container bottom - - - */
+  .leftContainer-bottom-mobile {
+	  display: none;
+  }
+  .leftContainer-bottom-web {
+    padding: 0 10rem;
+  }
+
+  .divisorsContainer-web {
+    display: grid;
+    grid-template-columns: 3fr 1fr 3fr;
+  }
+
+  .divisors-web {
+    border: 0.1px solid rgb(223, 223, 223);
+  }
+
+  #divisorText-web {
+    text-align: center;
+    margin-top: -0.6rem;
+    margin-left: -0.2rem;
+    color: rgb(179, 179, 179);
+    font-size: 0.9rem;
+  }
+
+  .externalLoginButtons-web {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+  }
+
+  .externalLogin-web {
+    display: grid;
+    border-radius: 3px;
+    grid-template-columns: 1fr 5fr;
+    border: 1px solid rgb(175, 175, 175);
+    padding: 0.7rem;
+    cursor: pointer;
+  }
+
+  .externalLogin-web:hover {
+    border: none;
+    background-color: rgb(221, 221, 221);
+  }
+
+  .externalLogin-web img {
+    height: 1.3rem;
+    justify-self: center;
+    align-self: center;
+  }
+
+  .externalLogin-web span {
+    justify-self: center;
+    align-self: center;
+  }
+
+  /* - - - - - - - R I G H T   C O N T A I N E R - - - - - */
+  .rightContainer {
+    background-color: rgb(238, 238, 238);
+    height: 100vh;
+    position: relative;
+  }
+
+  .inspirationalQuote {
+    position: absolute;
+    top: 20vh;
+    left: 2vw;
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+
+  .inspirationalQuoteEnding {
+    color: rgb(61, 110, 5);
+    font-weight: 400;
+  }
 }
 
-/* - - - left container medium - - - */
-.leftContainer-medium {
-  position: relative;
-  padding: 0 10rem;
-}
+/*-------------- MONITOR SCREEN ----------------*/
+@media only screen and (min-width: 1450px)  {
+  .login {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    color: #666666;
+  }
 
-.leftContainer-medium-title {
-  font-size: 2.5rem;
-  font-weight: 300;
-  margin-bottom: 2rem;
-}
+  /* - - - - - - - - L E F T   C O N T A I N E R - - - - - */
+  .leftContainer {
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr 4fr 1fr;
+  }
+  /* - - - left container top - - - */
+  .leftContainer-top p {
+    padding: 2rem;
+    text-align: right;
+  }
 
-/* - - - left container bottom - - - */
-.leftContainer-bottom {
-  padding: 0 10rem;
-}
+  .header_login {
+    font-weight: 400;
+    color: rgb(61, 110, 5);
+    cursor: pointer;
+  }
 
-.divisorsContainer {
-  display: grid;
-  grid-template-columns: 3fr 1fr 3fr;
-}
+  /* - - - left container medium - - - */
+  .leftContainer-medium {
+	  justify-self: center;
+  }
 
-.divisors {
-  border: 0.1px solid rgb(223, 223, 223);
-}
+  .leftContainer-medium-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
 
-#divisorText {
-  text-align: center;
-  margin-top: -0.6rem;
-  margin-left: -0.2rem;
-  color: rgb(179, 179, 179);
-  font-size: 0.9rem;
-}
+  /* - - - left container bottom - - - */
+  .leftContainer-bottom-mobile {
+	  display: none;
+  }
+  .leftContainer-bottom-web {
+    padding: 0 10rem;
+  }
 
-.externalLoginButtons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 2rem;
-}
+  .divisorsContainer-web {
+    display: grid;
+    grid-template-columns: 3fr 1fr 3fr;
+  }
 
-.externalLogin {
-  display: grid;
-  border-radius: 3px;
-  grid-template-columns: 1fr 5fr;
-  border: 1px solid rgb(175, 175, 175);
-  padding: 0.7rem;
-  cursor: pointer;
-}
+  .divisors-web {
+    border: 0.1px solid rgb(223, 223, 223);
+  }
 
-.externalLogin:hover {
-  border: none;
-  background-color: rgb(221, 221, 221);
-}
+  #divisorText-web {
+    text-align: center;
+    margin-top: -0.6rem;
+    margin-left: -0.2rem;
+    color: rgb(179, 179, 179);
+    font-size: 0.9rem;
+  }
 
-.externalLogin img {
-  height: 1.3rem;
-  justify-self: center;
-  align-self: center;
-}
+  .externalLoginButtons-web {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+  }
 
-.externalLogin span {
-  justify-self: center;
-  align-self: center;
-}
+  .externalLogin-web {
+    display: grid;
+    border-radius: 3px;
+    grid-template-columns: 1fr 5fr;
+    border: 1px solid rgb(175, 175, 175);
+    padding: 0.7rem 2rem;
+    cursor: pointer;
+	justify-self: center;
+  }
 
-/* - - - - - - - R I G H T   C O N T A I N E R - - - - - */
-.rightContainer {
-  background-color: rgb(238, 238, 238);
-  height: 100vh;
-  position: relative;
-}
+  .externalLogin-web:hover {
+    border: none;
+    background-color: rgb(221, 221, 221);
+  }
 
-.inspirationalQuote {
-  position: absolute;
-  top: 20vh;
-  left: 2vw;
-  font-size: 1.5rem;
-  font-weight: 300;
-  margin-bottom: 2rem;
-}
+  .externalLogin-web img {
+    height: 1.3rem;
+    justify-self: center;
+    align-self: center;
+  }
 
-.inspirationalQuoteEnding {
-  color: rgb(61, 110, 5);
-  font-weight: 400;
+  .externalLogin-web span {
+    justify-self: center;
+    align-self: center;
+  }
+
+  /* - - - - - - - R I G H T   C O N T A I N E R - - - - - */
+  .rightContainer {
+    background-color: rgb(238, 238, 238);
+    height: 100vh;
+    position: relative;
+  }
+
+  .inspirationalQuote {
+    position: absolute;
+    top: 15vh;
+    left: 4vw;
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+
+  .inspirationalQuoteEnding {
+    color: rgb(61, 110, 5);
+    font-weight: 400;
+  }
 }
 </style>
+
+

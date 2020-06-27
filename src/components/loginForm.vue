@@ -71,8 +71,8 @@ export default {
       user: {
         username: "irlandesmajere@gmail.com",
         password: "Navidad1",
-		passwordConfirmation: "Navidad1",
-		role: "user"
+        passwordConfirmation: "Navidad1",
+        role: "user"
       }
     };
   },
@@ -89,12 +89,11 @@ export default {
     },
     goToTermsAndConditions() {},
     parseInput() {
-		if (this.loginStatus) {
-			  this.$emit("launchLoginProcess", this.user);
-		} else if (this.isTermsAndConditionsAccepted) {
-			  this.$emit("launchLoginProcess", this.user);
-		} else
-			alert("You must accept terms and conditions")
+      if (this.loginStatus) {
+        this.$emit("launchLoginProcess", this.user);
+      } else if (this.isTermsAndConditionsAccepted) {
+        this.$emit("launchLoginProcess", this.user);
+      } else alert("You must accept terms and conditions");
     }
   },
   components: {}
@@ -102,80 +101,338 @@ export default {
 </script>
 
 <style scoped>
-.loginForm {
-  height: 27vw;
-  width: 30rem;
-  color: #666666;
-}
+/*-------------- IPHONE 5 ----------------*/
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
+  .loginForm {
+    height: 27vw;
+    width: 15rem;
+    color: #666666;
+  }
 
-.inputFields {
-  background-color: rgb(243, 243, 243);
-  border-radius: 8px;
-  margin-top: 0.2rem;
-  height: 2.3rem;
-  width: 100%;
-  padding: 2px 0.3rem;
-  font-size: 0.9rem;
-  color: #666666;
-}
+  .inputFields {
+    background-color: rgb(243, 243, 243);
+    border-radius: 8px;
+    margin-top: 0.2rem;
+    height: 2.3rem;
+    width: 100%;
+    padding: 2px 0.3rem;
+    font-size: 0.9rem;
+    color: #666666;
+  }
 
-.inputWrapper {
-  margin-bottom: 1rem;
-}
+  .inputWrapper {
+    margin-bottom: 1rem;
+  }
 
-.shadow {
-  -moz-box-shadow: inset 0 0 1px #cfcfcf;
-  -webkit-box-shadow: inset 0 0 1px #cfcfcf;
-  box-shadow: inset 0 0 1px #cfcfcf;
-}
+  .shadow {
+    -moz-box-shadow: inset 0 0 1px #cfcfcf;
+    -webkit-box-shadow: inset 0 0 1px #cfcfcf;
+    box-shadow: inset 0 0 1px #cfcfcf;
+  }
 
-::placeholder {
-  color: rgb(190, 190, 190);
-  font-size: 0.8rem;
-}
+  ::placeholder {
+    color: rgb(190, 190, 190);
+    font-size: 0.8rem;
+  }
 
-input:focus {
-  outline: none;
-}
+  input:focus {
+    outline: none;
+  }
 
-.termsAndConditionsText {
-  font-size: 0.9rem;
-}
+  .termsAndConditionsText {
+    font-size: 0.9rem;
+  }
 
-.termsOfService {
-  font-weight: 400;
-  color: rgb(61, 110, 5);
-  cursor: pointer;
-  text-decoration: underline;
-}
+  .termsOfService {
+    font-weight: 400;
+    color: rgb(61, 110, 5);
+    cursor: pointer;
+    text-decoration: underline;
+  }
 
-.checkbox {
-  transform: scale(1.2);
-  margin-right: 0.5rem;
-}
+  .checkbox {
+    transform: scale(1.2);
+    margin-right: 0.5rem;
+  }
 
-.buttonWrapper {
-  display: grid;
-}
+  .buttonWrapper {
+    display: grid;
+  }
 
-.buttonContainer {
-  display: grid;
-  position: relative;
-  justify-self: center;
-  background-color: rgb(39, 38, 38);
-  color: white;
-  margin-top: 2rem;
-  height: 3.4rem;
-  width: 15rem;
-  border-radius: 5rem;
-  cursor: pointer;
-}
+  .buttonContainer {
+    display: grid;
+    position: relative;
+    justify-self: center;
+    background-color: rgb(39, 38, 38);
+    color: white;
+    margin-top: 2rem;
+    height: 3rem;
+    width: 15rem;
+    border-radius: 5rem;
+    cursor: pointer;
+  }
 
-.buttonText {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  .buttonContainer:hover {
+    background-color: rgb(51, 50, 50);
+  }
+
+  .buttonText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+/*-------------- IPHONE 6 ----------------*/
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: portrait) {
+  .loginForm {
+    width: 18rem;
+  }
+
+  .buttonContainer {
+    margin-top: 4rem;
+  }
+}
+/*---------------- IPAD ----------------*/
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .loginForm {
+    height: 27vw;
+    width: 25rem;
+    color: #666666;
+  }
+
+  .inputFields {
+    background-color: rgb(243, 243, 243);
+    border-radius: 8px;
+    margin-top: 0.2rem;
+    height: 2.3rem;
+    width: 100%;
+    padding: 2px 0.3rem;
+    font-size: 0.9rem;
+    color: #666666;
+  }
+
+  .inputWrapper {
+    margin-bottom: 1rem;
+  }
+
+  .shadow {
+    -moz-box-shadow: inset 0 0 1px #cfcfcf;
+    -webkit-box-shadow: inset 0 0 1px #cfcfcf;
+    box-shadow: inset 0 0 1px #cfcfcf;
+  }
+
+  ::placeholder {
+    color: rgb(190, 190, 190);
+    font-size: 0.8rem;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  .termsAndConditionsText {
+    font-size: 0.9rem;
+  }
+
+  .termsOfService {
+    font-weight: 400;
+    color: rgb(61, 110, 5);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .checkbox {
+    transform: scale(1.2);
+    margin-right: 0.5rem;
+  }
+
+  .buttonWrapper {
+    display: grid;
+  }
+
+  .buttonContainer {
+    display: grid;
+    position: relative;
+    justify-self: center;
+    background-color: rgb(39, 38, 38);
+    color: white;
+    margin-top: 2rem;
+    height: 3rem;
+    width: 15rem;
+    border-radius: 5rem;
+    cursor: pointer;
+  }
+
+  .buttonContainer:hover {
+    background-color: rgb(51, 50, 50);
+  }
+
+  .buttonText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+/*-------------- HALF SCREEN ----------------*/
+@media only screen and (min-device-width: 500px) and (max-width: 1000px) {
+  .loginForm {
+    height: 27vw;
+    width: 25rem;
+    color: #666666;
+  }
+
+  .inputFields {
+    background-color: rgb(243, 243, 243);
+    border-radius: 8px;
+    margin-top: 0.2rem;
+    height: 2.3rem;
+    width: 100%;
+    padding: 2px 0.3rem;
+    font-size: 0.9rem;
+    color: #666666;
+  }
+
+  .inputWrapper {
+    margin-bottom: 1rem;
+  }
+
+  .shadow {
+    -moz-box-shadow: inset 0 0 1px #cfcfcf;
+    -webkit-box-shadow: inset 0 0 1px #cfcfcf;
+    box-shadow: inset 0 0 1px #cfcfcf;
+  }
+
+  ::placeholder {
+    color: rgb(190, 190, 190);
+    font-size: 0.8rem;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  .termsAndConditionsText {
+    font-size: 0.9rem;
+  }
+
+  .termsOfService {
+    font-weight: 400;
+    color: rgb(61, 110, 5);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .checkbox {
+    transform: scale(1.2);
+    margin-right: 0.5rem;
+  }
+
+  .buttonWrapper {
+    display: grid;
+  }
+
+  .buttonContainer {
+    display: grid;
+    position: relative;
+    justify-self: center;
+    background-color: rgb(39, 38, 38);
+    color: white;
+    margin-top: 2rem;
+    height: 3rem;
+    width: 15rem;
+    border-radius: 5rem;
+    cursor: pointer;
+  }
+
+  .buttonContainer:hover {
+    background-color: rgb(51, 50, 50);
+  }
+
+  .buttonText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+/*-------------- FULL SCREEN ----------------*/
+@media only screen and (min-width: 1001px) {
+  .loginForm {
+    height: 27vw;
+    width: 30rem;
+    color: #666666;
+  }
+
+  .inputFields {
+    background-color: rgb(243, 243, 243);
+    border-radius: 8px;
+    margin-top: 0.2rem;
+    height: 2.3rem;
+    width: 100%;
+    padding: 2px 0.3rem;
+    font-size: 0.9rem;
+    color: #666666;
+  }
+
+  .inputWrapper {
+    margin-bottom: 1rem;
+  }
+
+  .shadow {
+    -moz-box-shadow: inset 0 0 1px #cfcfcf;
+    -webkit-box-shadow: inset 0 0 1px #cfcfcf;
+    box-shadow: inset 0 0 1px #cfcfcf;
+  }
+
+  ::placeholder {
+    color: rgb(190, 190, 190);
+    font-size: 0.8rem;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  .termsAndConditionsText {
+    font-size: 0.9rem;
+  }
+
+  .termsOfService {
+    font-weight: 400;
+    color: rgb(61, 110, 5);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .checkbox {
+    transform: scale(1.2);
+    margin-right: 0.5rem;
+  }
+
+  .buttonWrapper {
+    display: grid;
+  }
+
+  .buttonContainer {
+    display: grid;
+    position: relative;
+    justify-self: center;
+    background-color: rgb(39, 38, 38);
+    color: white;
+    margin-top: 2rem;
+    height: 3.4rem;
+    width: 15rem;
+    border-radius: 5rem;
+    cursor: pointer;
+  }
+
+  .buttonText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 </style>
-
