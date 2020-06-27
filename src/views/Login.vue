@@ -36,11 +36,11 @@
         <div class="externalLoginButtons-web">
           <div class="externalLogin-web">
             <img src="../assets/Photos/googleIcon.svg" alt />
-            <span>Sign up with Google</span>
+            <span>{{Strings.signInWithGoogle}}</span>
           </div>
           <div class="externalLogin-web">
             <img src="../assets/Photos/linkedinIcon.svg" alt />
-            <span>Sign up with Linkedin</span>
+            <span>{{Strings.signInWithLinkedin}}</span>
           </div>
         </div>
       </div>
@@ -330,7 +330,6 @@ export default {
     display: none;
   }
 }
-
 /*-------------- HALF SCREEN ----------------*/
 @media only screen and (min-device-width: 500px) and (max-width: 1000px) {
   .login {
@@ -417,7 +416,6 @@ export default {
     display: none;
   }
 }
-
 /*-------------- FULL SCREEN ----------------*/
 @media only screen and (min-width: 1001px) and (max-width: 1450px) {
   .login {
@@ -537,7 +535,6 @@ export default {
     font-weight: 400;
   }
 }
-
 /*-------------- MONITOR SCREEN ----------------*/
 @media only screen and (min-width: 1450px)  {
   .login {
