@@ -22,7 +22,7 @@
       <div class="inputWrapper cityInput">
         <label>{{Strings.city}}</label>
         <br />
-        <input class="inputFields shadow" type="number" v-model="userData.city" />
+        <input class="inputFields shadow" type="text" v-model="userData.city" />
       </div>
 
       <!--- - - Picture  - - - -->
@@ -63,10 +63,10 @@ export default {
     return {
       Strings: new Object(),
       userData: {
-        username: null,
-        age: null,
+        username: "Rodrigo",
+        age: "28",
 		image: null,
-		city: null,
+		city: "Madrid",
       }
     };
   },
@@ -78,10 +78,18 @@ export default {
       this.userData.image = this.$refs["file-input"].files[0];
     },
     sendData() {
-      const formData = new FormData();
+	  const formData = new FormData();
+	  
+	  if (this.userData.username == null || this.userData.age == null || this.userData.image == null || this.userData.city == null) {
+		  console.log("Cannot have empty fields");
+		  return
+	  }
 
-      formData.append("image", this.userData.image);
+      formData.append("email", this.$store.getters.user);
       formData.append("username", this.userData.username);
+      formData.append("age", this.userData.age);
+      formData.append("image", this.userData.image);
+      formData.append("city", this.userData.city);
 
       user_services.uploadData(formData).then(res => {
         console.log(res);
