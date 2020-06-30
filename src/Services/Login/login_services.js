@@ -2,12 +2,12 @@ import axios from "axios"
 
 const Environment = {
 	local: "localhost",
-	dev: "15.188.37.72",
+	aws: "15.188.37.72",
 	dock: "login_server",
 	pro: ""
 }
 
-let currentEnvironment = Environment.dock
+let currentEnvironment = Environment.local
 
 
 async function logUser(username, password) {
@@ -65,15 +65,8 @@ async function logOut(username, password) {
 	return result
 }
 
-function logWithGoogle() {
-    axios.post("http://localhost:8888/auth/google")
-        .then((res) => {console.log(res); return true})
-        .catch((res) => {console.log(res); return false })
-}
-
 export default {
     logUser,
 	registerUser,
-	logWithGoogle,
 	logOut,
 }

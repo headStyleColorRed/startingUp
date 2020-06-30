@@ -13,5 +13,11 @@
 		"termsAndConditionsPage": "terms of service",
 		"signInWithGoogle": "Sign in with Google",
 		"signInWithLinkedin": "Sign in with Linkedin"
+	},
+	"screen_registration": {
+		"fillYourInfoHeader": "Hi! Fill your info and start your coding journey!",
+		"username": "Username",
+		"age": "Age",
+		"city": "City:"
 	}
 }

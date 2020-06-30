@@ -118,25 +118,30 @@ export default {
       }
     },
     parseRegisteringData(userData) {
-      let validationResult = validation.validateRegisterData(userData);
-      if (!validationResult.isError) {
-        login_services
-          .registerUser(
-            userData.username,
-            userData.password,
-            userData.passwordConfirmation
-          )
-          .then(res => {
-            if (res.code == "200") location.reload();
-            else console.log("server: " + res);
-          });
-      } else {
-        console.log(validationResult.errorMessage);
-      }
+		this.registerUser()
+    //   let validationResult = validation.validateRegisterData(userData);
+    //   if (!validationResult.isError) {
+    //     login_services
+    //       .registerUser(
+    //         userData.username,
+    //         userData.password,
+    //         userData.passwordConfirmation
+    //       )
+    //       .then(res => {
+    //         if (res.code == "200") this.registerUser(userData)
+    //         else console.log("server: " + res.errmsg);
+    //       });
+    //   } else {
+    //     console.log(validationResult.errorMessage);
+    //   }
     },
     logUser(userData) {
       this.$store.commit("setUserLoginData", userData);
       this.$router.push("/");
+    },
+    registerUser(userData) {
+    //   this.$store.commit("setUserLoginData", userData);
+      this.$router.push("/register");
     }
   },
   watch: {
