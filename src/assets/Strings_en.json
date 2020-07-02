@@ -18,6 +18,7 @@
 		"fillYourInfoHeader": "Hi! Fill your info and start your coding journey!",
 		"username": "Username",
 		"age": "Age",
-		"city": "City:"
+		"country": "Country",
+		"city": "City"
 	}
 }

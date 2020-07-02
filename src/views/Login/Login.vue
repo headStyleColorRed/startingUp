@@ -35,11 +35,11 @@
         </div>
         <div class="externalLoginButtons-web">
           <div class="externalLogin-web">
-            <img src="../assets/Photos/googleIcon.svg" alt />
+            <img src="../../assets/Photos/googleIcon.svg" alt />
             <span>{{Strings.signInWithGoogle}}</span>
           </div>
           <div class="externalLogin-web">
-            <img src="../assets/Photos/linkedinIcon.svg" alt />
+            <img src="../../assets/Photos/linkedinIcon.svg" alt />
             <span>{{Strings.signInWithLinkedin}}</span>
           </div>
         </div>
@@ -54,10 +54,10 @@
         </div>
         <div class="externalLoginButtonsMobile">
           <div class="externalLogin-mobile">
-            <img src="../assets/Photos/googleIcon.svg" alt />
+            <img src="../../assets/Photos/googleIcon.svg" alt />
           </div>
           <div class="externalLogin-mobile">
-            <img src="../assets/Photos/linkedinIcon.svg" alt />
+            <img src="../../assets/Photos/linkedinIcon.svg" alt />
           </div>
         </div>
       </div>
@@ -78,10 +78,10 @@
 </template>
 
 <script>
-import stringsImport from "../assets/Strings_en.json";
-import loginForm from "../components/loginForm.vue";
-import validation from "../functionalities/validation.js";
-import login_services from "../Services/Login/login_services.js";
+import stringsImport from "../../assets/Strings_en.json";
+import loginForm from "../../components/loginForm.vue";
+import validation from "../../functionalities/validation.js";
+import login_services from "../../Services/Login/login_services.js";
 
 export default {
   name: "login",

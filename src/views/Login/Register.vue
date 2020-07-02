@@ -22,14 +22,19 @@
       <div class="inputWrapper cityInput">
         <label>{{Strings.city}}</label>
         <br />
-        <input class="inputFields shadow" type="text" v-model="userData.city" />
+        <input
+          class="inputFields shadow"
+          type="text"
+          v-model="userData.city"
+          v-on:input="getCitySuggestions()"
+        />
       </div>
 
       <!--- - - Picture  - - - -->
       <div class="inputWrapper inputFiles">
         <p class="uploadAPictureText">Take a minute to upload a profile photo!</p>
         <div class="imgWrapper">
-          <img class="profilePicture" src="../assets/Photos/emptyProfilePic.png" alt />
+          <img class="profilePicture" src="../../assets/Photos/emptyProfilePic.png" alt />
           <input
             ref="file-input"
             id="file"
@@ -53,9 +58,9 @@
 </template>
 
 <script>
-import stringsImport from "../assets/Strings_en.json";
-import validation from "../functionalities/validation.js";
-import user_services from "../Services/User/user_services.js";
+import stringsImport from "../../assets/Strings_en.json";
+import validation from "../../functionalities/validation.js";
+import user_services from "../../Services/User/user_services.js";
 
 export default {
   name: "register",
@@ -65,8 +70,9 @@ export default {
       userData: {
         username: "Rodrigo",
         age: "28",
-		image: null,
-		city: "Madrid",
+        image: null,
+        city: "",
+        typingTimer: null,
       }
     };
   },
@@ -77,13 +83,33 @@ export default {
     storeImage(event) {
       this.userData.image = this.$refs["file-input"].files[0];
     },
+    getCitySuggestions() {
+      if (this.userData.city.length < 3) { return }
+
+      clearTimeout(this.typingTimer);
+	  this.typingTimer = setTimeout(() => {
+		  this.makeApiCall()
+	  }, 1000);
+    },
+    makeApiCall() {
+		user_services.getGoogleMapSuggestion(this.userData.city).then((res) => {
+			console.log(res);
+		})
+	},
     sendData() {
-	  const formData = new FormData();
-	  
-	  if (this.userData.username == null || this.userData.age == null || this.userData.image == null || this.userData.city == null) {
-		  console.log("Cannot have empty fields");
-		  return
-	  }
+      const formData = new FormData();
+
+      validation();
+
+      if (
+        this.userData.username == null ||
+        this.userData.age == null ||
+        this.userData.image == null ||
+        this.userData.city == null
+      ) {
+        console.log("Cannot have empty fields");
+        return;
+      }
 
       formData.append("email", this.$store.getters.user);
       formData.append("username", this.userData.username);
@@ -143,7 +169,7 @@ export default {
   }
 
   .cityInput {
-	  margin-bottom: 2rem;
+    margin-bottom: 2rem;
   }
 
   /*  File input */
