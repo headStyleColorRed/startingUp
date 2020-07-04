@@ -1,60 +1,6 @@
 <template>
-  <div class="register">
-    <div class="header"></div>
-
-    <h2 class="headerTitle">{{Strings.fillYourInfoHeader}}</h2>
-    <div class="inputWrapper">
-      <!--- - - Username  - - - -->
-      <div class="inputWrapper">
-        <label>{{Strings.username}}</label>
-        <br />
-        <input class="inputFields shadow" type="text" v-model="userData.username" />
-      </div>
-
-      <!--- - - Age  - - - -->
-      <div class="inputWrapper">
-        <label>{{Strings.age}}</label>
-        <br />
-        <input class="inputFields shadow" type="number" v-model="userData.age" />
-      </div>
-
-      <!--- - - City  - - - -->
-      <div class="inputWrapper cityInput">
-        <label>{{Strings.city}}</label>
-        <br />
-        <input
-          class="inputFields shadow"
-          type="text"
-          v-model="userData.city"
-          v-on:input="getCitySuggestions()"
-        />
-      </div>
-
-      <!--- - - Picture  - - - -->
-      <div class="inputWrapper inputFiles">
-        <p class="uploadAPictureText">Take a minute to upload a profile photo!</p>
-        <div class="imgWrapper">
-          <img class="profilePicture" src="../../assets/Photos/emptyProfilePic.png" alt />
-          <input
-            ref="file-input"
-            id="file"
-            type="file"
-            class="inputfile"
-            name="image"
-            v-on:change="storeImage()"
-          />
-          <label class="inputFileButton" for="file">
-            <v-icon class="addFileIcon" style="color: white;">fas fa-plus</v-icon>
-          </label>
-        </div>
-      </div>
-
-      <!--- - - Submit button  - - - -->
-      <div class="submitButtonWrapper">
-        <v-btn v-on:click="sendData()" class="submitButton" color="green">submit</v-btn>
-      </div>
-    </div>
-  </div>
+  <div class="profile">
+	   </div>
 </template>
 
 <script>
@@ -63,17 +9,10 @@ import validation from "../../functionalities/validation.js";
 import user_services from "../../Services/User/user_services.js";
 
 export default {
-  name: "register",
+  name: "profile",
   data() {
     return {
       Strings: new Object(),
-      userData: {
-        username: "Rodrigo",
-        age: "28",
-        image: null,
-        city: "",
-        typingTimer: null,
-      }
     };
   },
   mounted() {

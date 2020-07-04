@@ -71,9 +71,9 @@ export default {
         username: "Rodrigo",
         age: "28",
         image: null,
-        city: "",
-        typingTimer: null,
-      }
+        city: "Madrid"
+      },
+      typingTimer: null
     };
   },
   mounted() {
@@ -81,33 +81,35 @@ export default {
   },
   methods: {
     storeImage(event) {
-      this.userData.image = this.$refs["file-input"].files[0];
+		let validationResult = validation.validateImageExtension(this.$refs["file-input"].files[0].name)
+		if (validationResult.isError) { 
+			console.log(validationResult.errorMessage);
+			return
+		}
+	  this.userData.image = this.$refs["file-input"].files[0];
+
     },
     getCitySuggestions() {
-      if (this.userData.city.length < 3) { return }
+      if (this.userData.city.length < 3) {
+        return;
+      }
 
       clearTimeout(this.typingTimer);
-	  this.typingTimer = setTimeout(() => {
-		  this.makeApiCall()
-	  }, 1000);
+      this.typingTimer = setTimeout(() => {
+        //   this.makeApiCall()
+      }, 1000);
     },
     makeApiCall() {
-		user_services.getGoogleMapSuggestion(this.userData.city).then((res) => {
-			console.log(res);
-		})
-	},
+      user_services.getGoogleMapSuggestion(this.userData.city).then(res => {
+        console.log(res);
+      });
+    },
     sendData() {
       const formData = new FormData();
 
-      validation();
-
-      if (
-        this.userData.username == null ||
-        this.userData.age == null ||
-        this.userData.image == null ||
-        this.userData.city == null
-      ) {
-        console.log("Cannot have empty fields");
+      let isValidData = validation.validateRegisterData(this.userData);
+      if (isValidData.isError) {
+        console.log(isValidData.errorMessage);
         return;
       }
 

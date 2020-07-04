@@ -20,5 +20,10 @@
 		"age": "Age",
 		"country": "Country",
 		"city": "City"
+	},
+	"profile_registration": {
+		"aboutYourself": "Tell us a bit more about your knowledge",
+		"shortDescription": "A short description about your expertise",
+		"longDescription": "A longer description so the teams now"
 	}
 }

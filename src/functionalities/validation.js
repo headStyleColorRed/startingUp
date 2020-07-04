@@ -115,7 +115,6 @@ function validateRegisterData(userData) {
 		validationResult.errorMessage = validateName(userData.username)
 		return validationResult
 	}
-
 	if (validateAge(userData.age).length > 1) {
 		validationResult.isError = true
 		validationResult.errorMessage = validateAge(userData.age)
@@ -127,8 +126,47 @@ function validateRegisterData(userData) {
 		validationResult.errorMessage = validateCity(userData.city)
 		return validationResult
 	}
-	
+
+	if (validateImage(userData.image).length > 1) {
+		validationResult.isError = true
+		validationResult.errorMessage = validateImage(userData.image)
+		return validationResult
+	}
+
 	return validationResult
+}
+
+function validateImageExtension(imageName) {
+	let validationResult = {
+		isError: false,
+		errorMessage: new String()
+	}
+
+	if (validateExtension(imageName).length > 1) {
+		validationResult.isError = true
+		validationResult.errorMessage = validateExtension(imageName)
+		return validationResult
+	}
+
+	return validationResult
+}
+
+function validateExtension(str) {
+	let allowedExtensions = ["jpg", "png", "jpeg"]
+	let isValidExtension = false
+
+	if (!str)
+		return "Extension error: Extension field missing"
+
+	let currentExtension = str.split('.').pop()
+	allowedExtensions.forEach((allowedExtension) => {
+		if (allowedExtension == currentExtension) { isValidExtension = true }
+	})
+
+	if (!isValidExtension) 
+		return "Extension error: Extension not valid"
+
+	return ""
 }
 
 function validateName(str) {
@@ -140,6 +178,8 @@ function validateName(str) {
 
 	if (str.length < 5)
 		return "UserName error: User name shorter than 5 characters"
+
+	return ""
 }
 
 function validateAge(str) {
@@ -156,17 +196,29 @@ function validateAge(str) {
 
 	if (num < 5 || num > 100)
 		return num < 5 ? "Age error: Age is inferior to 5 years" : "Age error: Age is superior to 100 years"
+
+	return ""
 }
 
 function validateCity(str) {
 	if (!str)
-		return "Age error: Age field missing"
+		return "City error: City field missing"
 
 	if (str == "")
-		return "Age error: Empty Age"
+		return "City error: Empty City"
+
+	return ""
+}
+
+function validateImage(img) {
+	if (!img)
+		return "Image error: Image field missing"
+
+	return ""
 }
 
 module.exports = {
 	validateLoginData,
-	validateRegisterData
+	validateRegisterData,
+	validateImageExtension
 }
